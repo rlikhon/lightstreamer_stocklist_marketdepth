@@ -1,0 +1,244 @@
+<!DOCTYPE html >
+<html>
+
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <title>MPN :: Stock-List</title>
+  
+  <link rel="stylesheet" type="text/css" href="css/table.css" />
+</head>
+
+<body vlink="#6c21b1" link="#0000ee" bgcolor="#ffffff" >
+<div id="wrap" style="width: 100% !important;">      
+  <div class="demoTitle"  style="width: 100% !important;">MPN :: Stock-List/div>
+    <form>
+      <!-- stocks table -->
+      <div class="tableContainer">
+        <table cellspacing="0" cellpadding="4" border="0" style="width: 100%;" >
+        <tr class="tabletitle">
+            <td nowrap id="col_stock_name" style="text-align: left"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" id="col_stock_name_s" onclick="changeSort('stock_name');return false;" class="tabletitle">Name</a>
+              <img width="10" src="images/spacer.gif" id="img_stock_name" /></td>
+            <td nowrap id="col_last_price" ><a href="#" id="col_last_price_s" onclick="changeSort('last_price');return false;" class="tabletitle" >Last</a>
+              <img width="10" src="images/spacer.gif" id="img_last_price" /></td>
+            <td nowrap id="col_time" style="text-align: center"><a href="#" id="col_time_s" onclick="changeSort('time');return false;" class="tabletitle">Time</a>
+              <img width="10" src="images/spacer.gif" id="img_time" /></td>
+            <td nowrap id="col_arrow" style="text-align: center"><a href="#" id="col_arrow_s" onclick="changeSort('pct_change');return false;" class="tabletitle">+/-</a></td>
+            <td nowrap id="col_pct_change" ><a href="#" id="col_pct_change_s" onclick="changeSort('pct_change');return false;" class="tabletitle">Change</a>
+              <img width="10" src="images/spacer.gif" id="img_pct_change" /></td>
+            <td nowrap id="col_bid_quantity" ><a href="#" id="col_bid_quantity_s" onclick="changeSort('bid_quantity');return false;" class="tabletitle">Bid Size</a>
+              <img width="10" src="images/spacer.gif" id="img_bid_quantity" /></td>
+            <td nowrap id="col_bid" ><a href="#" id="col_bid_s" onclick="changeSort('bid');return false;" class="tabletitle">Bid</a>
+              <img width="10" src="images/spacer.gif" id="img_bid" /></td>
+            <td nowrap id="col_ask" ><a href="#" id="col_ask_s" onclick="changeSort('ask');return false;" class="tabletitle">Ask</a>
+              <img width="10" src="images/spacer.gif" id="img_ask" /></td>
+            <td nowrap id="col_ask_quantity" ><a href="#" id="col_ask_quantity_s" onclick="changeSort('ask_quantity');return false;" class="tabletitle">Ask Size</a>
+              <img width="10" src="images/spacer.gif" id="img_ask_quantity" /></td>
+            <td nowrap id="col_min" ><a href="#" id="col_min_s" onclick="changeSort('min');return false;" class="tabletitle">Min</a>
+              <img width="10" src="images/spacer.gif" id="img_min" /></td>
+            <td nowrap id="col_max" ><a href="#" id="col_max_s" onclick="changeSort('max');return false;" class="tabletitle">Max</a>
+              <img width="10" src="images/spacer.gif" id="img_max" /></td>
+            <td nowrap id="col_ref_price" ><a href="#" id="col_ref_price_s" onclick="changeSort('ref_price');return false;" class="tabletitle">Ref.</a>
+              <img width="10" src="images/spacer.gif" id="img_ref_price" /></td>
+            <td nowrap id="col_open_price" ><a href="#" id="col_open_price_s" onclick="changeSort('open_price');return false;" class="tabletitle">Open</a>
+              <img width="10" src="images/spacer.gif" id="img_open_price" /></td>
+            <td nowrap id="col_notify" ><a href="#" id="col_notify_s" onclick="changeSort('notify');return false;" class="tabletitle">Notify</a>
+              <img width="10" src="images/spacer.gif" id="img_notify" /></td>
+          </tr>
+
+          <tr id="stocks"  data-source="lightstreamer" class="lscoldA" border="0" >
+            <td nowrap style="text-align: left">
+              <a href="#" data-source="lightstreamer" data-field="click" data-update="onclick">
+                <img src="images/popup.png" style="padding: 5px;" width="16" height="16" border="0" align="left" hspace="1" alt="Graphic Chart">
+                <div id="stockName" style="font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 12pt; color: #000000; font-weight: bold; text-align: left; padding: 5px;" data-source="lightstreamer" data-field="stock_name">Loading...</div>
+              </a>
+            </td>
+            <td><div data-source="lightstreamer" data-field="last_price">-</div></td>
+            <td><div data-source="lightstreamer" data-field="time">-</div></td>
+            <td>
+              <div>
+                <img data-source="lightstreamer" data-field="arrow" data-update="src" src="images/spacer.gif" width="20" height="8" border="0">
+              </div>
+            </td>
+            <td nowrap="nowrap"><div data-source="lightstreamer" data-field="pct_change">-</div></td>
+            <td><div data-source="lightstreamer" data-field="bid_quantity">-</div></td>
+            <td><div data-source="lightstreamer" data-field="bid">-</div></td>
+            <td><div data-source="lightstreamer" data-field="ask">-</div></td>
+            <td><div data-source="lightstreamer" data-field="ask_quantity">-</div></td>
+            <td><div data-source="lightstreamer" data-field="min">-</div></td>
+            <td><div data-source="lightstreamer" data-field="max">-</div></td>
+            <td><div data-source="lightstreamer" data-field="ref_price">-</div></td>
+            <td><div data-source="lightstreamer" data-field="open_price">-</div></td>
+            <td align="center"><input data-source="lightstreamer" data-field="notify" data-fieldtype="extra" data-update="checked" type="checkbox"><!-- Note: checkbox's onClick event is assigned during DynaGrid's onVisualUpdate event --></td>
+          </tr>
+          <tr>
+          <td colspan="14" class="simulatedDataDisc">Simulated market data.</td>
+          </tr>
+          <tr>
+            <td colspan="14" style="font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 12pt; color: #000000; background: #ffffff; font-weight: bold; text-align: right">
+              <a href="#" id="switchP2" style="color: #4c8f4c; display:none" onClick="changePage(2); return false;"> Next 15 >> </a>
+              <a href="#" id="switchP1" style="color: #4c8f4c; display:none" onClick="changePage(1); return false;"> << Previous 15 </a>
+            </td>
+          </tr>
+        </table>
+      </div>
+    </form>
+
+  <br/>
+  <button id="mpnButton" onclick="register()" class="discMpnButton">Register for push notifications</button>
+  <br/>
+  <div id="mpnBox"></div>
+  
+</div>
+
+</div>
+
+<!-- load Firebase libraries -->
+<!-- NB keep the imports in synch with firebase-messaging-sw.js -->
+<script src="https://www.gstatic.com/firebasejs/7.7.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.7.0/firebase-messaging.js"></script>
+
+<!-- load Lightstreamer libraries -->
+
+<script src="js/lightstreamer.min.js" data-lightstreamer-ns="Ls"></script>
+
+<script src="js/env.js"></script>
+<script src="js/format.js"></script>
+<script src="js/const.js"></script>
+<script src="js/lsMpn.js"></script>
+<script src="js/index.js"></script>
+
+<link rel="stylesheet" type="text/css" href="css/md.css" />
+<div id="wrap">    
+      <div>
+      <table >
+        <tr>
+          <td class="hlabel" width="100px" ">Stock Name: </td>
+          <td width="240px" ><div class="syntheticData" data-source="lightstreamer" data-grid="Sintesi" data-item="1" data-field="short_description">--</div></td>
+          <td width="80px" class="hlabel" >Ref Price:</td>
+          <td width="90px"><div class="syntheticData" data-source="lightstreamer" data-grid="Sintesi" data-item="1" data-field="reference_price">--</div></td>
+          <td colspan="2" width="190px"><div class="syntheticDataPh" data-source="lightstreamer" data-grid="Sintesi" data-item="1" data-field="trading_phase">--</div></td>
+        </tr>
+        <tr>
+          <td class="hlabel" width="100px">Last Time: </td>
+          <td width="240px" ><div class="syntheticData" data-source="lightstreamer" data-grid="Sintesi" data-item="1" data-field="last">--</div></td>
+          <td width="80px" class="hlabel">Last Price:</td>
+          <td width="90px"><div class="syntheticData" data-source="lightstreamer" data-grid="Sintesi" data-item="1" data-field="last_price">--</div></td>
+          <td width="80px" class="hlabel">Last Qty:</td>
+          <td width="110px"><div class="syntheticData" data-source="lightstreamer" data-grid="Sintesi" data-item="1" data-field="last_qty">--</div></td>
+         </tr>
+      </table>
+      
+      <!-- order entry section; see management code in buysell.js -->
+      <form id="order-ins" onSubmit="return false;" class="tablespacer">
+        <table class="inputPanel" width="690px" border="0" cellpadding="0" cellspacing="0">
+          <tr height="35px" >
+           <td width="230px" >
+            <select id="stockN" width="220px" type="select" class="inputelement" onchange="selectChange()"></select>
+           </td>
+           <td width="210px" style="text-align: center; padding-left: 10px;" >
+            Qty: <input id="qtyN" type="text" class="inputelement" size="9"/>
+           </td>
+           <td width="230px" style="text-align: right;">
+            Price: <input id="pxN" type="text" class="inputelement" size="9"/>
+           </td>
+           
+          </tr>
+          <tr class="inputPanel" height="35px" >
+           <td width="230px"></td>
+          <td width="210px" style="text-align: center;">
+            <input type="submit" id="buy" class="buttonBuy" disabled value="Buy" onclick="submitForm('BUY')" />
+            <input type="submit" id="sell" class="buttonSell" disabled value="Sell" onclick="submitForm('SELL')"/>
+           </td>
+           <td width="230px" style="text-align: right;">
+            <input type="submit" id="gridOpt" style="background: #fff url('images/plus.gif') no-repeat center right; color: #444; padding-right: 16px; font-size: 9pt; border-style: none; border-radius: 3px;" value="Show my orders " onclick="changeOrdersDisplay()"/>
+           </td>
+          </tr>
+        </table>
+      </form>
+      
+      <!-- orders table; see Lightstreamer-related code in buysell.js -->
+      <div id="needforscroll" style="height: 160px; overflow-x: hidden; overflow-y: scroll; display: none;" >
+       <table width="670px" cellspacing="1" cellpadding="2" border="0">
+        <tr class="tableTitle">
+           <td colspan="6">Orders Log</td>
+        </tr>
+        <tr>
+          <td width="90px" nowrap id="col_ord_prog" class="tableTitle">
+           <a href="#" onclick="changeSortOrders('prog');return false;">Prog</a>
+           <img width="10" src="images/spacer.gif" id="img_ord_prog" /></td>
+          <td width="140px" nowrap id="col_ord_stock" class="tableTitle">
+            <a href="#" onclick="changeSortOrders('stock');return false;">Stock</a>
+           <img width="10" src="images/spacer.gif" id="img_ord_stock" /></td>
+          <td width="55px" nowrap id="col_ord_side" class="tableTitle">
+           <a href="#" onclick="changeSortOrders('side');return false;">Order</a>
+           <img width="10" src="images/spacer.gif" id="img_ord_side" /></td>
+          <td width="105px" nowrap id="col_ord_qty" class="tableTitle">
+           <a href="#" onclick="changeSortOrders('qty');return false;">Quantity</a>
+           <img width="10" src="images/spacer.gif" id="img_ord_qty" /></td>
+          <td width="105px" nowrap id="col_ord_px" class="tableTitle">
+           <a href="#" onclick="changeSortOrders('px');return false;">Price</a>
+           <img width="10" src="images/spacer.gif" id="img_ord_px" /></td>
+          <td width="170px" nowrap id="col_ord_status" class="tableTitle">
+           <a href="#" onclick="changeSortOrders('status');return false;">Status</a>
+           <img width="10" src="images/spacer.gif" id="img_ord_status" /></td>
+        </tr>
+
+        <tr class="tablerow" id="orders" data-source="lightstreamer" >
+          <td><div data-source="lightstreamer" data-field="prog"></div></td>
+          <td><div data-source="lightstreamer" data-field="stock"></div></td>
+          <td><div data-source="lightstreamer" data-field="side"></div></td>
+          <td><div data-source="lightstreamer" data-field="qty"></div></td>
+          <td><div data-source="lightstreamer" data-field="px"></div></td>
+          <td><div data-source="lightstreamer" data-field="status"></div></td>
+        </tr>
+       </table>
+      </div>
+      
+      <table width="690px" class="tablespacer">
+        <tr>
+          <td class="tablebook">
+            <table  width="340px" cellspacing="1" cellpadding="1" border="0">
+              <!-- row template; will be cloned for each received "ADD" command -->
+              <tr id="buyside" data-source="lightstreamer">
+                <td width="50%" style="text-align: right;"><div data-source="lightstreamer" data-field="qty"></div></td>
+                <td width="50%" style="text-align: center;"><div data-source="lightstreamer" data-field="key"></div></td>
+              </tr>
+            </table>
+          </td>
+          <td class="tablebook">
+            <table width="340px"  cellspacing="1" cellpadding="1" border="0">
+              <!-- row template; will be cloned for each received "ADD" command -->
+              <tr id="sellside" data-source="lightstreamer">
+                <td width="50%" style="text-align: center;"><div data-source="lightstreamer" data-field="key"></div></td>
+                <td width="50%" style="text-align: right;"><div data-source="lightstreamer" data-field="qty"></div></td>
+              </tr>
+            </table>
+          </td>
+         </tr>
+      </table>
+      <table width="690px" style="margin-bottom: 150px;">
+        <tr>
+          <td>
+            <div class="verysmall" style="text-align: left;" data-source="lightstreamer" data-grid="Sintesi" data-item="1" data-field="buy_depth">--</div>
+          </td>
+          <td>
+            <div class="verysmall" style="text-align: center;" >: Market Depth :</div>
+          </td>
+          <td>
+            <div class="verysmall" style="text-align: right;" data-source="lightstreamer" data-grid="Sintesi" data-item="1" data-field="sell_depth">--</div>
+          </td>
+        </tr>
+      </table>
+     </div>
+       
+  </div>
+
+
+<script src="js/require.js"></script>
+<script src="js/lightstreamer.min.js"></script>
+<script src="js/buysell.js"></script>
+<script src="js/main.js"></script>
+</body>
+
+</html>
